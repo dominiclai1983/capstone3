@@ -29,7 +29,7 @@ gem "image_processing", "~> 1.2"
 gem "bootsnap", ">= 1.4.4", require: false
 
 #formatting helper
-gem "prettier"
+#gem "prettier"
 
 gem "aws-sdk-s3", require: false
 

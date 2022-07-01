@@ -1,68 +1,66 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Menu, Image } from 'semantic-ui-react';
 
-export default class Layout extends Component {
-	state = { activeItem: 'editorials' };
+function Layout(props) {
+	const [activeItem, setActiveItem] = useState('editorials');
 
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+	const handleItemClick = (e, { name }) => setActiveItem(name);
 
-	render() {
-		const { activeItem } = this.state;
+	return (
+		<>
+			<Menu secondary>
+				<Menu.Item>
+					<Image
+						src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
+						size='tiny'
+					/>
+				</Menu.Item>
 
-		return (
-			<>
-				<Menu secondary>
-					<Menu.Item>
-						<Image
-							src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
-							size='tiny'
-						/>
+				<Menu.Item
+					name='home'
+					active={activeItem === 'home'}
+					onClick={handleItemClick}
+				>
+					Home
+				</Menu.Item>
+
+				<Menu.Item
+					name='reviews'
+					active={activeItem === 'reviews'}
+					onClick={handleItemClick}
+				>
+					Reviews
+				</Menu.Item>
+
+				<Menu.Item
+					name='upcomingEvents'
+					active={activeItem === 'upcomingEvents'}
+					onClick={handleItemClick}
+				>
+					Upcoming Events
+				</Menu.Item>
+
+				<Menu.Menu position='right'>
+					<Menu.Item
+						name='signup'
+						active={activeItem === 'signup'}
+						onClick={handleItemClick}
+					>
+						SignUp
 					</Menu.Item>
 
 					<Menu.Item
-						name='editorials'
-						active={activeItem === 'editorials'}
-						onClick={this.handleItemClick}
+						name='login'
+						active={activeItem === 'login'}
+						onClick={handleItemClick}
 					>
-						Editorials
+						Login
 					</Menu.Item>
-
-					<Menu.Item
-						name='reviews'
-						active={activeItem === 'reviews'}
-						onClick={this.handleItemClick}
-					>
-						Reviews
-					</Menu.Item>
-
-					<Menu.Item
-						name='upcomingEvents'
-						active={activeItem === 'upcomingEvents'}
-						onClick={this.handleItemClick}
-					>
-						Upcoming Events
-					</Menu.Item>
-
-					<Menu.Menu position='right'>
-						<Menu.Item
-							name='signup'
-							active={activeItem === 'signup'}
-							onClick={this.handleItemClick}
-						>
-							SignUp
-						</Menu.Item>
-
-						<Menu.Item
-							name='login'
-							active={activeItem === 'login'}
-							onClick={this.handleItemClick}
-						>
-							Login
-						</Menu.Item>
-					</Menu.Menu>
-				</Menu>
-				{props.children}
-			</>
-		);
-	}
+				</Menu.Menu>
+			</Menu>
+			{props.children}
+		</>
+	);
 }
+
+export default Layout;

@@ -6,19 +6,19 @@ import CustomDotGroup from './CustomDotGroup';
 
 const ImageCarousel = () => (
 	<CarouselProvider
-		naturalSlideWidth={1}
+		naturalSlideWidth={2.16}
 		naturalSlideHeight={1}
 		totalSlides={3}
 	>
 		<Slider>
 			<Slide tag='a' index={0}>
-				<Image src='https://lorempixel.com/800/800/cats/0' />
+				<Image src='https://via.placeholder.com/918x425.png' />
 			</Slide>
 			<Slide tag='a' index={1}>
-				<Image src='https://lorempixel.com/800/800/cats/1' />
+				<Image src='https://via.placeholder.com/918x425.png' />
 			</Slide>
 			<Slide tag='a' index={2}>
-				<Image src='https://lorempixel.com/800/800/cats/2' />
+				<Image src='https://via.placeholder.com/918x425.png' />
 			</Slide>
 		</Slider>
 
