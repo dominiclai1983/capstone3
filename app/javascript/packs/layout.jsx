@@ -1,48 +1,68 @@
-// layout.jsx
-import React from "react";
+import React, { Component } from 'react';
+import { Menu, Image } from 'semantic-ui-react';
 
-const Layout = (props) => {
-  return (
-    <React.Fragment>
-      <nav className="navbar navbar-expand navbar-light bg-light">
-        <div className="container">
-          <a className="navbar-brand" href="#">
-            React in Rails Demo
-          </a>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/demo">
-                  Demo
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div className="container py-3">{props.children}</div>
-      <footer className="p-3 bg-light">
-        <div className="container">
-          <span className="me-3 text-secondary">
-            Built by{" "}
-            <a
-              href="https://www.altcademy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Altcademy
-            </a>{" "}
-            with ☕ and 💜
-          </span>
-        </div>
-      </footer>
-    </React.Fragment>
-  );
-};
+export default class Layout extends Component {
+	state = { activeItem: 'editorials' };
 
-export default Layout;
+	handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+	render() {
+		const { activeItem } = this.state;
+
+		return (
+			<>
+				<Menu secondary>
+					<Menu.Item>
+						<Image
+							src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
+							size='tiny'
+						/>
+					</Menu.Item>
+
+					<Menu.Item
+						name='editorials'
+						active={activeItem === 'editorials'}
+						onClick={this.handleItemClick}
+					>
+						Editorials
+					</Menu.Item>
+
+					<Menu.Item
+						name='reviews'
+						active={activeItem === 'reviews'}
+						onClick={this.handleItemClick}
+					>
+						Reviews
+					</Menu.Item>
+
+					<Menu.Item
+						name='upcomingEvents'
+						active={activeItem === 'upcomingEvents'}
+						onClick={this.handleItemClick}
+					>
+						Upcoming Events
+					</Menu.Item>
+
+					<Menu.Menu position='right'>
+						<Menu.Item
+							name='signup'
+							active={activeItem === 'signup'}
+							onClick={this.handleItemClick}
+						>
+							SignUp
+						</Menu.Item>
+
+						<Menu.Item
+							name='login'
+							active={activeItem === 'login'}
+							onClick={this.handleItemClick}
+						>
+							Login
+						</Menu.Item>
+					</Menu.Menu>
+				</Menu>
+				{props.children}
+			</>
+		);
+	}
+}
