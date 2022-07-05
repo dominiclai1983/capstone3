@@ -1,10 +1,47 @@
 import React, { useState } from 'react';
-import { Menu, Image } from 'semantic-ui-react';
+import { Menu, Image, Dropdown } from 'semantic-ui-react';
 
 function Layout(props) {
 	const [activeItem, setActiveItem] = useState('editorials');
 
 	const handleItemClick = (e, { name }) => setActiveItem(name);
+	const [isLogin, setIsLogin] = useState(true);
+	const [username, setUsername] = useState('user');
+
+	//remember the prop component has to be capital
+	const LoginComponent = () => {
+		return (
+			<>
+				<Menu.Item
+					name='signup'
+					active={activeItem === 'signup'}
+					onClick={handleItemClick}
+				>
+					SignUp
+				</Menu.Item>
+				<Menu.Item
+					name='login'
+					active={activeItem === 'login'}
+					onClick={handleItemClick}
+				>
+					Login
+				</Menu.Item>
+			</>
+		);
+	};
+
+	const LogoutComponent = () => {
+		//TODO: findout how to do conditionally for dropdown text
+		return (
+			<Dropdown item text='Welcome'>
+				<Dropdown.Menu>
+					<Dropdown.Item>English</Dropdown.Item>
+					<Dropdown.Item>Russian</Dropdown.Item>
+					<Dropdown.Item>Spanish</Dropdown.Item>
+				</Dropdown.Menu>
+			</Dropdown>
+		);
+	};
 
 	return (
 		<>
@@ -39,23 +76,12 @@ function Layout(props) {
 				>
 					Upcoming Events
 				</Menu.Item>
-
 				<Menu.Menu position='right'>
-					<Menu.Item
-						name='signup'
-						active={activeItem === 'signup'}
-						onClick={handleItemClick}
-					>
-						SignUp
-					</Menu.Item>
-
-					<Menu.Item
-						name='login'
-						active={activeItem === 'login'}
-						onClick={handleItemClick}
-					>
-						Login
-					</Menu.Item>
+					{isLogin ? (
+						<LogoutComponent username={username} />
+					) : (
+						<LoginComponent />
+					)}
 				</Menu.Menu>
 			</Menu>
 			{props.children}
