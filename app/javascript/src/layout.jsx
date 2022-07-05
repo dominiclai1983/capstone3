@@ -31,15 +31,17 @@ function Layout(props) {
 	};
 
 	const LogoutComponent = () => {
-		//TODO: findout how to do conditionally for dropdown text
 		return (
-			<Dropdown item text='Welcome'>
-				<Dropdown.Menu>
-					<Dropdown.Item>English</Dropdown.Item>
-					<Dropdown.Item>Russian</Dropdown.Item>
-					<Dropdown.Item>Spanish</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
+			<>
+				<Dropdown item text='Welcome'>
+					<Dropdown.Menu>
+						<Dropdown.Item>Account</Dropdown.Item>
+						<Dropdown.Item>Order</Dropdown.Item>
+						<Dropdown.Item>Payment</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+				<Menu.Item> </Menu.Item>
+			</>
 		);
 	};
 
