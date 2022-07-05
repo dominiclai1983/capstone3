@@ -1,6 +1,6 @@
 import React from 'react';
-import ImageCarousel from './components/ImageCarousel';
-import { Container, Header, Message, Segment } from 'semantic-ui-react';
+import ImageCarousel from '@components/ImageCarousel';
+import { Container } from 'semantic-ui-react';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 

@@ -208,11 +208,9 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.4)
+    stripe (5.43.0)
     thor (1.2.1)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     web-console (4.2.0)
@@ -241,7 +239,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
-  aws-sdk-s3
+  aws-sdk-s3 (~> 1.112)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
@@ -256,7 +254,7 @@ DEPENDENCIES
   selenium-webdriver (>= 4.0.0.rc1)
   spring
   sqlite3 (~> 1.4)
-  turbolinks (~> 5)
+  stripe
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers

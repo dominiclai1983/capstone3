@@ -1,7 +1,13 @@
 class StaticPagesController < ApplicationController
-  def home
+  def index
+    render "index"
   end
 
-  def demo
+  def login
+    render "login"
+  end
+
+  def signup
+    render "signup"
   end
 end
