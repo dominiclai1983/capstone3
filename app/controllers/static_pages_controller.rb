@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
   def signup
     render "signup"
   end
+
+  def bracelet
+    render "bracelet"
+  end
 end

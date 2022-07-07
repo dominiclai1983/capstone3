@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 function Layout(props) {
 	const [activeItem, setActiveItem] = useState('editorials');
@@ -56,6 +57,8 @@ function Layout(props) {
 				</Menu.Item>
 
 				<Menu.Item
+					as={NavLink}
+					to='/'
 					name='home'
 					active={activeItem === 'home'}
 					onClick={handleItemClick}
@@ -68,7 +71,7 @@ function Layout(props) {
 					active={activeItem === 'reviews'}
 					onClick={handleItemClick}
 				>
-					Reviews
+					Bracelet
 				</Menu.Item>
 
 				<Menu.Item
@@ -76,7 +79,7 @@ function Layout(props) {
 					active={activeItem === 'upcomingEvents'}
 					onClick={handleItemClick}
 				>
-					Upcoming Events
+					Earrings
 				</Menu.Item>
 				<Menu.Menu position='right'>
 					{isLogin ? (
@@ -86,7 +89,7 @@ function Layout(props) {
 					)}
 				</Menu.Menu>
 			</Menu>
-			{props.children}
+			<Outlet />
 		</>
 	);
 }

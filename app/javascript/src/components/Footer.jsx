@@ -5,8 +5,8 @@ import '@components/compscss/utils.scss';
 
 const Footer = () => {
 	return (
-		<Grid divided='vertically'>
-			<Grid.Row columns={4} className='footer-text-center '>
+		<Grid divided='vertically' textAlign='center'>
+			<Grid.Row columns={4} className='mt-4'>
 				<Grid.Column>
 					<Image
 						src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
