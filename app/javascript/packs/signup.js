@@ -1,1 +1,1 @@
-import '@src/signup';
+import '@src/index';

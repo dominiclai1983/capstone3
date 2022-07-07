@@ -1,12 +1,12 @@
 import React from 'react';
 import { Grid, Image } from 'semantic-ui-react';
 
-import '@components/compscss/utils.scss';
+import '@src/css/utils.scss';
 
 const FrontPageGrid = () => {
 	return (
 		<Grid columns={3} divided>
-			<Grid.Row className='top-margin'>
+			<Grid.Row className='mt-4'>
 				<Grid.Column>
 					<Image src='https://via.placeholder.com/429x164.png' />
 				</Grid.Column>

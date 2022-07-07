@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Image } from 'semantic-ui-react';
 
-import '@components/compscss/utils.scss';
+import '@src/css/utils.scss';
 
 const Footer = () => {
 	return (
