@@ -24,13 +24,16 @@ const Login = () => {
 		try {
 			const result = await axios.post('/api/sessions', user);
 			console.log(result.data);
+			if (result.data.success) {
+				window.location.replace('/');
+			}
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
 	return (
-		<Container style={{ margin: 20 }}>
+		<Container style={{ marginTop: 20 }}>
 			<Segment placeholder>
 				<Grid columns={2} relaxed='very' stackable>
 					<Grid.Column>

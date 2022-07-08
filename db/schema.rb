@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_01_092119) do
+ActiveRecord::Schema.define(version: 2022_07_08_144644) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -85,12 +85,10 @@ ActiveRecord::Schema.define(version: 2022_07_01_092119) do
   end
 
   create_table "product_codes", force: :cascade do |t|
-    t.string "category_code"
-    t.string "category_desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "product_id"
-    t.index ["product_id"], name: "index_product_codes_on_product_id"
+    t.string "code"
+    t.string "desc"
   end
 
   create_table "products", force: :cascade do |t|
@@ -103,6 +101,8 @@ ActiveRecord::Schema.define(version: 2022_07_01_092119) do
     t.integer "reserved", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_code_id"
+    t.index ["product_code_id"], name: "index_products_on_product_code_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -128,6 +128,6 @@ ActiveRecord::Schema.define(version: 2022_07_01_092119) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "product_codes", "products"
+  add_foreign_key "products", "product_codes"
   add_foreign_key "sessions", "users"
 end

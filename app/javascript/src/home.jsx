@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageCarousel from '@components/ImageCarousel';
 import FrontPageGrid from '@components/FrontPageGrid';
-import Footer from './components/Footer';
+import Footer from '@components/Footer';
 import { Container } from 'semantic-ui-react';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -10,7 +10,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 const Home = () => {
 	return (
 		<>
-			<Container style={{ margin: 20 }}>
+			<Container style={{ marginTop: 20 }}>
 				<ImageCarousel />
 				<FrontPageGrid />
 				<Footer />

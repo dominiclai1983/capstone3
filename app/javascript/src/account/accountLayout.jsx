@@ -5,8 +5,9 @@ import { Container, Header, Grid, Image, Menu } from 'semantic-ui-react';
 import '@src/css/utils.scss';
 
 const AccountLayout = () => {
-	const handleItemClick = (e, { name }) => setActiveItem(name);
 	const [activeItem, setActiveItem] = useState('editorials');
+
+	const handleItemClick = (e, { name }) => setActiveItem(name);
 
 	const AccountMenu = () => {
 		return (

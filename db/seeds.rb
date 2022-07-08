@@ -28,44 +28,42 @@ users =
       }
     ]
   )
+
+product_codes =
+  ProductCode.create(
+    [
+      { category_code: "A101", category_desc: "Bracelet" },
+      { category_code: "A102", category_desc: "Earrings" }
+    ]
+  )
+
 =end
 products =
   Product.create(
     [
       {
-        title: "This is a book",
-        description: "This is a book",
-        sku: "A101",
+        title: "A Large Bracelet",
+        description: "A Large Bracelet",
+        sku: "B101",
         price: 12.33,
-        quantity: 5
+        quantity: 5,
+        product_code_id: 1
       },
       {
-        title: "This is a book",
-        description: "This is a book",
-        sku: "A101",
-        price: 12.33,
-        quantity: 5
-      },
-      {
-        title: "This is a pen",
-        description: "This is a book",
-        sku: "A102",
+        title: "A Medium Bracelet",
+        description: "A Medium Bracelet",
+        sku: "B102",
         price: 12.55,
-        quantity: 5
+        quantity: 5,
+        product_code_id: 1
       },
       {
-        title: "This is a cup",
-        description: "This is a cup",
-        sku: "A103",
+        title: "A Small Bracelet",
+        description: "A Small Bracelet",
+        sku: "B103",
         price: 12.44,
-        quantity: 5
-      },
-      {
-        title: "This is a cake",
-        description: "This is a cake",
-        sku: "A104",
-        price: 12.44,
-        quantity: 5
+        quantity: 5,
+        product_code_id: 1
       }
     ]
   )

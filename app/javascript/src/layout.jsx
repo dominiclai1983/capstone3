@@ -13,6 +13,7 @@ function Layout(props) {
 			try {
 				const result = await axios.get('/api/authenticated');
 				setIsLogin(result.data.authenticated);
+				setUsername(result.data.username);
 			} catch (err) {
 				console.error(err);
 			}
@@ -52,6 +53,7 @@ function Layout(props) {
 					name='login'
 					active={activeItem === 'login'}
 					onClick={handleItemClick}
+					style={{ marginRight: 20 }}
 				>
 					Login
 				</Menu.Item>
@@ -59,10 +61,11 @@ function Layout(props) {
 		);
 	};
 
-	const LogoutComponent = () => {
+	const LogoutComponent = (props) => {
+		let { username } = props;
 		return (
 			<>
-				<Dropdown item text='Welcome'>
+				<Dropdown item text={'Welcome! ' + username.toString()} color='orange'>
 					<Dropdown.Menu>
 						<Dropdown.Item>Account</Dropdown.Item>
 						<Dropdown.Item>Order</Dropdown.Item>
