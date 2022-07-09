@@ -17,9 +17,6 @@ const ProductLayOut = (props) => {
 			<Grid.Row>
 				<Grid.Column width={9}>
 					<Image src='https://via.placeholder.com/860x700.png' />
-					<Container text>
-						<p>{description}</p>
-					</Container>
 				</Grid.Column>
 				<Grid.Column width={6} style={{ marginTop: 40 }}>
 					<Header as='h3'>{title}</Header>
@@ -28,16 +25,12 @@ const ProductLayOut = (props) => {
 					<Button fluid primary>
 						Add To Cart
 					</Button>
+					<Button fluid style={{ marginTop: 5 }}>
+						Buy it now
+					</Button>
 					<Divider />
 					<Container text>
-						<p textAlign='center'>
-							<Icon name='redo alternate' color='orange' size='large' />
-							Easy Return
-							<Icon name='redo alternate' color='orange' size='large' />
-							Easy Return
-							<Icon name='redo alternate' color='orange' size='large' />
-							Easy Return
-						</p>
+						<p>{description}</p>
 					</Container>
 				</Grid.Column>
 			</Grid.Row>
