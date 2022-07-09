@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 function Layout(props) {
-	const [activeItem, setActiveItem] = useState('editorials');
+	const [activeItem, setActiveItem] = useState('home');
 	const [isLogin, setIsLogin] = useState(false);
 	const [username, setUsername] = useState('user');
 
@@ -65,7 +65,7 @@ function Layout(props) {
 		let { username } = props;
 		return (
 			<>
-				<Dropdown item text={'Welcome! ' + username.toString()} color='orange'>
+				<Dropdown item text={'Welcome! ' + username.toString()}>
 					<Dropdown.Menu>
 						<Dropdown.Item>Account</Dropdown.Item>
 						<Dropdown.Item>Order</Dropdown.Item>
@@ -81,7 +81,7 @@ function Layout(props) {
 	return (
 		<>
 			<Menu secondary>
-				<Menu.Item>
+				<Menu.Item style={{ marginLeft: 20 }}>
 					<Image
 						src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
 						size='tiny'

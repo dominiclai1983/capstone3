@@ -6,4 +6,6 @@ json.product do
   json.price @product.price
   json.quantity @product.quantity
   json.product_code_id @product.product_code_id
+  json.code @product_code.code
+  json.desc @product_code.desc
 end

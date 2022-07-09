@@ -8,6 +8,7 @@ class Api::ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(sku: params[:sku])
+    @product_code = ProductCode.find(@product.product_code_id) 
     return render json: { error: "not_found" }, status: :not_found if !@product
 
     render "api/products/show", status: :ok

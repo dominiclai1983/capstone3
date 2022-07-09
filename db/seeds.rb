@@ -31,13 +31,12 @@ users =
 
 product_codes =
   ProductCode.create(
-    [
-      { category_code: "A101", category_desc: "Bracelet" },
-      { category_code: "A102", category_desc: "Earrings" }
-    ]
+    [{ code: "A101", desc: "Bracelet" }, { code: "A102", desc: "Earrings" }]
   )
 
+
 =end
+
 products =
   Product.create(
     [
