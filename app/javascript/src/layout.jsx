@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-function Layout(props) {
-	const [activeItem, setActiveItem] = useState('home');
+function Layout() {
+	const location = useLocation();
+	const [activeItem, setActiveItem] = useState(location.pathname);
 	const [isLogin, setIsLogin] = useState(false);
 	const [username, setUsername] = useState('user');
+
+	console.log(location);
+	console.log(location.pathname);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -41,8 +45,8 @@ function Layout(props) {
 				<Menu.Item
 					as={NavLink}
 					to='/signup'
-					name='signup'
-					active={activeItem === 'signup'}
+					name='/signup'
+					active={activeItem === '/signup'}
 					onClick={handleItemClick}
 				>
 					SignUp
@@ -50,8 +54,8 @@ function Layout(props) {
 				<Menu.Item
 					as={NavLink}
 					to='/login'
-					name='login'
-					active={activeItem === 'login'}
+					name='/login'
+					active={activeItem === '/login'}
 					onClick={handleItemClick}
 					style={{ marginRight: 20 }}
 				>
@@ -91,8 +95,8 @@ function Layout(props) {
 				<Menu.Item
 					as={NavLink}
 					to='/'
-					name='home'
-					active={activeItem === 'home'}
+					name='/'
+					active={activeItem === '/'}
 					onClick={handleItemClick}
 				>
 					Home
@@ -101,16 +105,16 @@ function Layout(props) {
 				<Menu.Item
 					as={NavLink}
 					to='/bracelet'
-					name='bracelet'
-					active={activeItem === 'bracelet'}
+					name='/bracelet'
+					active={activeItem === '/bracelet'}
 					onClick={handleItemClick}
 				>
 					Bracelet
 				</Menu.Item>
 
 				<Menu.Item
-					name='earrings'
-					active={activeItem === 'earrings'}
+					name='/earrings'
+					active={activeItem === '/earrings'}
 					onClick={handleItemClick}
 				>
 					Earrings
