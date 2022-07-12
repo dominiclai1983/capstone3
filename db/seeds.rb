@@ -35,7 +35,7 @@ product_codes =
   )
 
 
-=end
+
 
 products =
   Product.create(
@@ -63,6 +63,24 @@ products =
         price: 12.44,
         quantity: 5,
         product_code_id: 1
+      }
+    ]
+  )
+=end
+users =
+  User.create(
+    [
+      {
+        username: "mimi",
+        email: "mimi@test.com",
+        password: "password",
+        is_admin: true
+      },
+      {
+        username: "kiki",
+        email: "kiki@test.com",
+        password: "password",
+        is_admin: true
       }
     ]
   )

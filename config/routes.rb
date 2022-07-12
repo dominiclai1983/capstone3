@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/login"        => "static_pages#index"
   get "/signup"       => "static_pages#index"
   get "/bracelet"     => "static_pages#index"
+  get "/earrings"     => "static_pages#index"
   get "/account"      => "static_pages#index"
   get "/product/:sku" => "static_pages#index"
 
@@ -31,8 +32,13 @@ Rails.application.routes.draw do
     #product api 
     get     "/products"             => "products#index"
     get     "/products/:sku"        => "products#show"
+    get     "/products/cat/:code"   => "products#find_product_by_product_code"
     post    "/products"             => "products#create"
     post    "/products/:sku"        => "products#edit_by_sku"
+
+    #product code
+    post    "/product_codes"        => "product_codes#create"
+    get     "/product_codes/:desc"  => "product_codes#find_product_code_by_desc"
 
     #session api
     post    "/sessions"             => "sessions#create"

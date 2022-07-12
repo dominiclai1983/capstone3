@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { Card, Image } from 'semantic-ui-react';
+import { useLocation } from 'react-router-dom';
 
 const src = 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg';
 
-const itemDisplay = () => {
+const ItemDisplay = () => {
+	const { pathname } = useLocation();
 	const [price, setPrice] = useState(12);
 
 	const items = _.times(8, (i) => {
@@ -22,4 +24,4 @@ const itemDisplay = () => {
 	return <Card.Group itemsPerRow={3}>{items}</Card.Group>;
 };
 
-export default itemDisplay;
+export default ItemDisplay;

@@ -69,7 +69,7 @@ function Layout() {
 		let { username } = props;
 		return (
 			<>
-				<Dropdown item text={'Welcome! ' + username.toString()}>
+				<Dropdown item text={username.toString()}>
 					<Dropdown.Menu>
 						<Dropdown.Item>Account</Dropdown.Item>
 						<Dropdown.Item>Order</Dropdown.Item>
@@ -113,6 +113,8 @@ function Layout() {
 				</Menu.Item>
 
 				<Menu.Item
+					as={NavLink}
+					to='/earrings'
 					name='/earrings'
 					active={activeItem === '/earrings'}
 					onClick={handleItemClick}

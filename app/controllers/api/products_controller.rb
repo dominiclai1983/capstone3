@@ -8,10 +8,18 @@ class Api::ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(sku: params[:sku])
-    @product_code = ProductCode.find(@product.product_code_id) 
+    @product_code = ProductCode.find(@product.product_code_id)
     return render json: { error: "not_found" }, status: :not_found if !@product
 
     render "api/products/show", status: :ok
+  end
+
+  def find_product_by_product_code
+    @products =
+      Product.find_by(product_code_id: params[:code]).page(params[:page]).per(6)
+
+    return render json: { error: "not_found" }, status: :not_found if !@products
+    render "api/products/index", status: :ok
   end
 
   def create
@@ -51,7 +59,8 @@ class Api::ProductsController < ApplicationController
       :sku,
       :price,
       :quantity,
-      :image
+      :image,
+      :product_code_id
     )
   end
 

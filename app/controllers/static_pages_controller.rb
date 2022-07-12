@@ -3,15 +3,19 @@ class StaticPagesController < ApplicationController
     render "index"
   end
 
-  def login
-    render "login"
-  end
+  #def login
+  #  render "login"
+  #end
 
-  def signup
-    render "signup"
-  end
+  #def signup
+  #  render "signup"
+  #end
 
-  def bracelet
-    render "bracelet"
-  end
+  #def bracelet
+  #  render "bracelet"
+  #end
+
+  #def bracelet
+  #  render "bracelet"
+  #end
 end
