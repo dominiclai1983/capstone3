@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const src = 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg';
@@ -44,7 +43,7 @@ const ItemDisplay = () => {
 	const items = products.map((product, index) => {
 		return (
 			<Card key={index}>
-				<Image src={src} />
+				<Image src={src} as={Link} to={'/product/' + product.sku} />
 				<Card.Content>
 					<Card.Header>{product.title}</Card.Header>
 					<Card.Description textAlign='right'>

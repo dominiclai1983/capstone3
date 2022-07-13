@@ -8,12 +8,14 @@ import ItemDisplay from '@components/ItemDisplay';
 import '@src/css/utils.scss';
 
 const Product = () => {
-	const [activeItem, setActiveItem] = useOutletContext();
 	const { pathname } = useLocation();
+	const [activeItem, setActiveItem] = useOutletContext();
+
 	const handleItemClick = (e, { name }) => {
 		setActiveItem(name);
 		console.log(name);
 	};
+
 	return (
 		<>
 			<Container style={{ marginTop: 20 }}>
