@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Loader } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +11,8 @@ const ItemDisplay = () => {
 	const [code, setCode] = useState('');
 	const [productCodeID, setProductCodeID] = useState('');
 	const [products, setProducts] = useState([]);
+	const [totalPages, setTotalPages] = useState(null);
+	const [nextPage, setNextPage] = useState(null);
 
 	console.log(path);
 
@@ -31,8 +33,13 @@ const ItemDisplay = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const result = await axios.get(`/api/products/${productCodeID}/cat`);
+				const result = await axios.get(
+					`/api/products/${productCodeID}/cat?page=1`
+				);
 				setProducts(result.data.products);
+				setTotalPages(result.data.total_pages);
+				setNextPage(result.data.next_page);
+				console.log(result.data.products);
 			} catch (err) {
 				console.error(err);
 			}
@@ -54,7 +61,12 @@ const ItemDisplay = () => {
 		);
 	});
 
-	return <Card.Group itemsPerRow={3}>{items}</Card.Group>;
+	return (
+		<Card.Group itemsPerRow={3}>
+			{items}
+			{/* <Loader active inline='centered' /> */}
+		</Card.Group>
+	);
 };
 
 export default ItemDisplay;
