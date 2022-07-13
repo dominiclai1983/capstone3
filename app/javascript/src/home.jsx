@@ -1,7 +1,7 @@
 import React from 'react';
-import ImageCarousel from '@components/ImageCarousel';
-import FrontPageGrid from '@components/FrontPageGrid';
-import Footer from '@components/Footer';
+import ImageCarousel from '@components/home/ImageCarousel';
+import FrontPageGrid from '@components/home/FrontPageGrid';
+import Footer from '@components/home/Footer';
 import { Container } from 'semantic-ui-react';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';

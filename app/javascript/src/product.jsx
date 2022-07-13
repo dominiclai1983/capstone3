@@ -1,20 +1,29 @@
 import React from 'react';
 import _ from 'lodash';
 import { Grid, Container, Header, Breadcrumb } from 'semantic-ui-react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useOutletContext } from 'react-router-dom';
 import SortingMenu from '@components/SortingMenu';
 import ItemDisplay from '@components/ItemDisplay';
 
 import '@src/css/utils.scss';
 
 const Product = () => {
+	const [activeItem, setActiveItem] = useOutletContext();
 	const { pathname } = useLocation();
-
+	const handleItemClick = (e, { name }) => {
+		setActiveItem(name);
+		console.log(name);
+	};
 	return (
 		<>
 			<Container style={{ marginTop: 20 }}>
 				<Breadcrumb size='small'>
-					<Breadcrumb.Section as={Link} to='/'>
+					<Breadcrumb.Section
+						as={Link}
+						to='/'
+						name='home'
+						onClick={handleItemClick}
+					>
 						Home
 					</Breadcrumb.Section>
 					<Breadcrumb.Divider icon='right chevron' color='orange' />
@@ -37,8 +46,8 @@ const Product = () => {
 
 				<Grid>
 					<Grid.Row columns={1}>
-						<Grid.Column text textAlign='right'>
-							{/* <SortingMenu /> */}
+						<Grid.Column textAlign='right'>
+							<SortingMenu />
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>

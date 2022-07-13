@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     #product api 
     get     "/products"             => "products#index"
     get     "/products/:sku"        => "products#show"
-    get     "/products/cat/:code"   => "products#find_product_by_product_code"
+    get     "/products/:code/cat"   => "products#find_product_by_product_code"
     post    "/products"             => "products#create"
     post    "/products/:sku"        => "products#edit_by_sku"
 

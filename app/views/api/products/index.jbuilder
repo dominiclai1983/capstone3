@@ -9,5 +9,7 @@ json.products do
     json.sku product.sku
     json.price product.price
     json.quantity product.quantity
+    json.available product.available
+    json.reserved product.reserved
   end
 end

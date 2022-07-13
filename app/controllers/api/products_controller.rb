@@ -16,7 +16,7 @@ class Api::ProductsController < ApplicationController
 
   def find_product_by_product_code
     @products =
-      Product.find_by(product_code_id: params[:code]).page(params[:page]).per(6)
+      Product.where(product_code_id: params[:code]).page(params[:page]).per(6)
 
     return render json: { error: "not_found" }, status: :not_found if !@products
     render "api/products/index", status: :ok

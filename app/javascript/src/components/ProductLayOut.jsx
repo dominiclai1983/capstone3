@@ -29,7 +29,7 @@ const ProductLayOut = (props) => {
 						Buy it now
 					</Button>
 					<Divider />
-					<Container text>
+					<Container>
 						<p>{description}</p>
 					</Container>
 				</Grid.Column>

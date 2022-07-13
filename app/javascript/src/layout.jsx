@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import _ from 'lodash';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function Layout() {
-	const location = useLocation();
-	const [activeItem, setActiveItem] = useState(location.pathname);
+	const { pathname } = useLocation();
+	const path = pathname === '/' ? 'home' : pathname.substring(1);
+
+	const [activeItem, setActiveItem] = useState(path);
 	const [isLogin, setIsLogin] = useState(false);
 	const [username, setUsername] = useState('user');
-
-	console.log(location);
-	console.log(location.pathname);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -45,8 +45,8 @@ function Layout() {
 				<Menu.Item
 					as={NavLink}
 					to='/signup'
-					name='/signup'
-					active={activeItem === '/signup'}
+					name='signup'
+					active={activeItem === 'signup'}
 					onClick={handleItemClick}
 				>
 					SignUp
@@ -54,8 +54,8 @@ function Layout() {
 				<Menu.Item
 					as={NavLink}
 					to='/login'
-					name='/login'
-					active={activeItem === '/login'}
+					name='login'
+					active={activeItem === 'login'}
 					onClick={handleItemClick}
 					style={{ marginRight: 20 }}
 				>
@@ -69,7 +69,7 @@ function Layout() {
 		let { username } = props;
 		return (
 			<>
-				<Dropdown item text={username.toString()}>
+				<Dropdown item text='username'>
 					<Dropdown.Menu>
 						<Dropdown.Item>Account</Dropdown.Item>
 						<Dropdown.Item>Order</Dropdown.Item>
@@ -95,8 +95,8 @@ function Layout() {
 				<Menu.Item
 					as={NavLink}
 					to='/'
-					name='/'
-					active={activeItem === '/'}
+					name='home'
+					active={activeItem === 'home'}
 					onClick={handleItemClick}
 				>
 					Home
@@ -105,8 +105,8 @@ function Layout() {
 				<Menu.Item
 					as={NavLink}
 					to='/bracelet'
-					name='/bracelet'
-					active={activeItem === '/bracelet'}
+					name='bracelet'
+					active={activeItem === 'bracelet'}
 					onClick={handleItemClick}
 				>
 					Bracelet
@@ -115,8 +115,8 @@ function Layout() {
 				<Menu.Item
 					as={NavLink}
 					to='/earrings'
-					name='/earrings'
-					active={activeItem === '/earrings'}
+					name='earrings'
+					active={activeItem === 'earrings'}
 					onClick={handleItemClick}
 				>
 					Earrings
@@ -129,7 +129,7 @@ function Layout() {
 					)}
 				</Menu.Menu>
 			</Menu>
-			<Outlet />
+			<Outlet context={[activeItem, setActiveItem]} />
 		</>
 	);
 }
