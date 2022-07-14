@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
-import { Menu, Image, Dropdown } from 'semantic-ui-react';
+import { Menu, Image, Dropdown, Icon } from 'semantic-ui-react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { CartState } from '@src/context';
 
 function Layout() {
 	const { pathname } = useLocation();
+	const { cart } = CartState();
 	const path = pathname === '/' ? 'home' : pathname.substring(1);
 
 	const [activeItem, setActiveItem] = useState(path);
@@ -57,7 +59,6 @@ function Layout() {
 					name='login'
 					active={activeItem === 'login'}
 					onClick={handleItemClick}
-					style={{ marginRight: 20 }}
 				>
 					Login
 				</Menu.Item>
@@ -127,6 +128,17 @@ function Layout() {
 					) : (
 						<LoginComponent />
 					)}
+					<Menu.Item
+						as={NavLink}
+						to='/cart'
+						name='cart'
+						active={activeItem === 'cart'}
+						onClick={handleItemClick}
+						style={{ marginRight: 20 }}
+					>
+						<Icon name='shopping cart' size='large' />
+						{cart.length}
+					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
 			<Outlet context={[activeItem, setActiveItem]} />

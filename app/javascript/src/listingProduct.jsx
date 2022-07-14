@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import ProductBreadcrumb from '@components/ProductBreadcrumb';
-import ProductLayOut from '@components/ProductLayOut';
+import ProductBreadcrumb from '@components/listingProduct/ProductBreadcrumb';
+import ProductLayOut from '@components/listingProduct/ProductLayOut';
 
 const ListingProduct = () => {
 	let { sku } = useParams();

@@ -6,28 +6,33 @@ import Home from './home';
 import Login from './login';
 import Signup from './signup';
 import Product from './product';
-import ListingProduct from './product/listingProduct';
+import ListingProduct from './listingProduct';
+import Cart from './cart';
 import AccountLayout from './account/accountLayout';
 import AccountHome from './account/accountHome';
+import Context from './context';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const Index = () => (
 	<>
-		<BrowserRouter>
-			<Routes>
-				<Route path='/' element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path='login' element={<Login />} />
-					<Route path='signup' element={<Signup />} />
-					<Route path='bracelet' element={<Product />} />
-					<Route path='earrings' element={<Product />} />
-					<Route path='product/:sku' element={<ListingProduct />} />
-					<Route path='account' element={<AccountLayout />}>
-						<Route index element={<AccountHome />} />
+		<Context>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Layout />}>
+						<Route index element={<Home />} />
+						<Route path='login' element={<Login />} />
+						<Route path='signup' element={<Signup />} />
+						<Route path='bracelet' element={<Product />} />
+						<Route path='earrings' element={<Product />} />
+						<Route path='product/:sku' element={<ListingProduct />} />
+						<Route path='cart' element={<Cart />} />
+						<Route path='account' element={<AccountLayout />}>
+							<Route index element={<AccountHome />} />
+						</Route>
 					</Route>
-				</Route>
-			</Routes>
-		</BrowserRouter>
+				</Routes>
+			</BrowserRouter>
+		</Context>
 	</>
 );
 

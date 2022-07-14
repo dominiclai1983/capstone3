@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import { Grid, Container, Header, Breadcrumb } from 'semantic-ui-react';
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import SortingMenu from '@components/SortingMenu';
-import ItemDisplay from '@components/ItemDisplay';
+import SortingMenu from '@components/product/SortingMenu';
+import ItemDisplay from '@components/product/ItemDisplay';
+import sortingArray from '@components/supportinglist';
 
 import '@src/css/utils.scss';
 
 const Product = () => {
 	const { pathname } = useLocation();
 	const [activeItem, setActiveItem] = useOutletContext();
+	//const [sortingType, setSortingType] = useState('price');
 
 	const handleItemClick = (e, { name }) => {
 		setActiveItem(name);

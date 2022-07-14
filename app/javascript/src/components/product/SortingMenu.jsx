@@ -1,7 +1,8 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import sortingArray from '@components/supportinglist';
 
-const SortingMenu = () => {
+const SortingMenu = (props) => {
 	return (
 		<Dropdown text='Sort'>
 			<Dropdown.Menu>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/earrings"     => "static_pages#index"
   get "/account"      => "static_pages#index"
   get "/product/:sku" => "static_pages#index"
+  get "/cart"         => "static_pages#index"
 
   namespace :api do
     resources :users, only: %i[create index]

@@ -8,10 +8,19 @@ import {
 	Container,
 	Icon,
 } from 'semantic-ui-react';
-import ProductIconGroup from '@components/ProductIconGroup';
+import { CartState } from '@src/context';
+//import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
 
 const ProductLayOut = (props) => {
 	let { title, price, description } = props;
+	const { cart, setCart } = CartState();
+
+	const prod = {
+		title,
+		price,
+		quantity: 1,
+	};
+
 	return (
 		<Grid>
 			<Grid.Row>
@@ -25,7 +34,14 @@ const ProductLayOut = (props) => {
 					<Button fluid primary>
 						Add To Cart
 					</Button>
-					<Button fluid style={{ marginTop: 5 }}>
+					<Button
+						fluid
+						style={{ marginTop: 5 }}
+						onClick={() => {
+							setCart([...cart, prod]);
+							console.log(cart);
+						}}
+					>
 						Buy it now
 					</Button>
 					<Divider />
