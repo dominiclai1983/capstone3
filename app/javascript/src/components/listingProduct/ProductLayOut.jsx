@@ -31,17 +31,17 @@ const ProductLayOut = (props) => {
 					<Header as='h3'>{title}</Header>
 					<Header as='h4'>{price}</Header>
 					<Divider />
-					<Button fluid primary>
-						Add To Cart
-					</Button>
 					<Button
 						fluid
-						style={{ marginTop: 5 }}
+						primary
 						onClick={() => {
 							setCart([...cart, prod]);
 							console.log(cart);
 						}}
 					>
+						Add To Cart
+					</Button>
+					<Button fluid style={{ marginTop: 5 }}>
 						Buy it now
 					</Button>
 					<Divider />

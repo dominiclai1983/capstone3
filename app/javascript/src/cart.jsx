@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CartState } from '@src/context';
-import { Button, Container, Icon, Table, Image } from 'semantic-ui-react';
+import { Button, Container, Table, Image, Icon } from 'semantic-ui-react';
 
 const Cart = () => {
 	const { cart, setCart } = CartState();
@@ -36,14 +36,34 @@ const Cart = () => {
 							<Table.Cell>{product.quantity}</Table.Cell>
 							<Table.Cell>
 								<Button color='red' onClick={deleteItem(index)}>
-									Cancel
+									<Icon name='close' /> Cancel
 								</Button>
 							</Table.Cell>
 						</Table.Row>
 					))}
 				</Table.Body>
 			</Table>
-			{total.toFixed(2)}
+
+			<Table.Footer>
+				<Table.Row>
+					<Table.Cell />
+					<Table.Cell />
+					<Table.Cell />
+					<Table.Cell>
+						{cart.length === 0 ? null : (
+							<Button
+								floated='right'
+								icon
+								labelPosition='left'
+								primary
+								size='small'
+							>
+								<Icon name='check' /> Check Out
+							</Button>
+						)}
+					</Table.Cell>
+				</Table.Row>
+			</Table.Footer>
 		</Container>
 	);
 };
