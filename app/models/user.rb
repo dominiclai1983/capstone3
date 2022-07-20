@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :sessions
   has_many :orders
+
+  has_secure_password
   #remember to make the proper association. otherwise, it would not be able to read.
 
   validates :username, presence: true, length: { minimum: 3, maximum: 64 }
@@ -9,12 +11,4 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :username
   validates_uniqueness_of :email
-
-  after_validation :hash_password
-
-  private
-
-  def hash_password
-    self.password = BCrypt::Password.create(self.password)
-  end
 end

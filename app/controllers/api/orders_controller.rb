@@ -3,18 +3,11 @@ class Api::OrdersController < ApplicationController
     if !session
       return render json: { error: "user not logged in" }, status: :unauthorized
     end
-=begin
-    begin
-      @order = Order.create({ user_id: session.user.id })
-      session.user.current_order = @order.id
-      render "api/orders/create", status: :created
-    rescue ArgumentError => e
-      render json: { error: e.message }, status: :bad_request
-    end
-=end
+    token = cookies.signed[:ecommerce_session_token]
+    session = Session.find_by(token: token)
     @order = Order.create({ user_id: session.user.id })
-    if @order.save && !session.user.current_order
-      session.user.update(current_order: @order.id)
+    if @order.save and !session.user.current_order
+      session.user.update_attribute(:current_order, @order.id)
       render "api/orders/create", status: :created
     else
       render json: { success: false }, status: :bad_request

@@ -2,8 +2,7 @@ class Api::SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:user][:email])
 
-    if @user and
-         BCrypt::Password.new(@user.password) == params[:user][:password]
+    if @user and @user.authenticate(params[:user][:password])
       session = @user.sessions.create
       cookies.permanent.signed[:ecommerce_session_token] = {
         value: session.token,
