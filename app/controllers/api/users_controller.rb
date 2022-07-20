@@ -22,8 +22,7 @@ class Api::UsersController < ApplicationController
     if session
       @user = session.user
 
-      if @user and
-           BCrypt::Password.new(@user.password) == params[:user][:password]
+      if @user and @user.authenticate(params[:user][:password])
         @user.password = BCrypt::Password.create(params[:user][:new_password])
         render "api/users/password"
       else

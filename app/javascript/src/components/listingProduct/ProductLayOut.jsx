@@ -13,7 +13,7 @@ import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
 
 const ProductLayOut = (props) => {
 	let { title, price, description } = props;
-	const { cart, setCart } = CartState();
+	const { cart, setCart, currentOrder } = CartState();
 
 	const prod = {
 		title,

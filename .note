@@ -2,3 +2,5 @@
     t.datetime "shipping_date"
     t.boolean "status", default: false
     t.boolean "payment_status", default: false
+
+    

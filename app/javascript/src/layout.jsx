@@ -28,6 +28,8 @@ function Layout() {
 		fetchData();
 	}, []);
 
+	console.log(currentOrder);
+
 	const handleItemClick = (e, { name }) => setActiveItem(name);
 
 	const handleLogOut = async () => {
