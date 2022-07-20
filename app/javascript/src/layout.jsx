@@ -7,7 +7,7 @@ import { CartState } from '@src/context';
 
 function Layout() {
 	const { pathname } = useLocation();
-	const { cart } = CartState();
+	const { cart, currentOrder, setCurrentOrder } = CartState();
 	const path = pathname === '/' ? 'home' : pathname.substring(1);
 
 	const [activeItem, setActiveItem] = useState(path);
@@ -20,6 +20,7 @@ function Layout() {
 				const result = await axios.get('/api/authenticated');
 				setIsLogin(result.data.authenticated);
 				setUsername(result.data.username);
+				setCurrentOrder(result.data.current_order);
 			} catch (err) {
 				console.error(err);
 			}

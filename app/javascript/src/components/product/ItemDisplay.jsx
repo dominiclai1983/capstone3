@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Image, Loader } from 'semantic-ui-react';
+import { Card, Image, Container, Dropdown, Grid } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const src = 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg';
 
-const ItemDisplay = () => {
+const ItemDisplay = (props) => {
+	const { sortingType } = props;
 	const { pathname } = useLocation();
 	const path = pathname.substring(1);
 	const [code, setCode] = useState('');
@@ -15,6 +16,7 @@ const ItemDisplay = () => {
 	const [nextPage, setNextPage] = useState(null);
 
 	console.log(path);
+	console.log(sortingType);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -47,7 +49,23 @@ const ItemDisplay = () => {
 		fetchData();
 	}, [code]);
 
-	const items = products.map((product, index) => {
+	const sortingProduct = () => {
+		let sortedProducts = products;
+
+		if (sortingType === 'asce') {
+			sortedProducts = sortedProducts.sort((a, b) => {
+				return a.price - b.price;
+			});
+		}
+		if (sortingType === 'desc') {
+			sortedProducts = sortedProducts.sort((a, b) => {
+				return b.price - a.price;
+			});
+		}
+		return sortedProducts;
+	};
+
+	const items = sortingProduct().map((product, index) => {
 		return (
 			<Card key={index}>
 				<Image src={src} as={Link} to={'/product/' + product.sku} />
@@ -62,10 +80,12 @@ const ItemDisplay = () => {
 	});
 
 	return (
-		<Card.Group itemsPerRow={3}>
-			{items}
-			{/* <Loader active inline='centered' /> */}
-		</Card.Group>
+		<Container style={{ marginTop: 20 }}>
+			<Card.Group itemsPerRow={3}>
+				{items}
+				{/* <Loader active inline='centered' /> */}
+			</Card.Group>
+		</Container>
 	);
 };
 

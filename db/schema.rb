@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_08_144644) do
+ActiveRecord::Schema.define(version: 2022_07_20_052204) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,17 +70,10 @@ ActiveRecord::Schema.define(version: 2022_07_08_144644) do
     t.datetime "shipping_date"
     t.boolean "status", default: false
     t.boolean "payment_status", default: false
-    t.string "recipient_name"
-    t.string "shipping_address_1"
-    t.string "shipping_address_2"
-    t.string "postal_code"
-    t.string "city"
-    t.string "country"
-    t.string "phone_number"
     t.string "tracking_number"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -120,6 +113,7 @@ ActiveRecord::Schema.define(version: 2022_07_08_144644) do
     t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "current_order"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

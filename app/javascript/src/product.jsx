@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { Grid, Container, Header, Breadcrumb } from 'semantic-ui-react';
+import {
+	Grid,
+	Container,
+	Header,
+	Breadcrumb,
+	Dropdown,
+} from 'semantic-ui-react';
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import SortingMenu from '@components/product/SortingMenu';
+//import SortingMenu from '@components/product/SortingMenu';
 import ItemDisplay from '@components/product/ItemDisplay';
-import sortingArray from '@components/supportinglist';
+//import sortingArray from '@components/supportinglist';
 
 import '@src/css/utils.scss';
 
 const Product = () => {
 	const { pathname } = useLocation();
 	const [activeItem, setActiveItem] = useOutletContext();
-	//const [sortingType, setSortingType] = useState('price');
+	const [sortingType, setSortingType] = useState('default');
 
 	const handleItemClick = (e, { name }) => {
 		setActiveItem(name);
+		console.log(name);
+	};
+
+	const handleDropDownClick = (e, { name }) => {
+		setSortingType(name);
 		console.log(name);
 	};
 
@@ -47,18 +58,34 @@ const Product = () => {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-
+				{/* TODO: writing the method to change the sorting mode*/}
 				<Grid>
 					<Grid.Row columns={1}>
 						<Grid.Column textAlign='right'>
-							<SortingMenu />
+							<Dropdown text='Sort'>
+								<Dropdown.Menu>
+									<Dropdown.Item
+										text='Best Selling'
+										name='default'
+										onClick={handleDropDownClick}
+									/>
+									<Dropdown.Item
+										text='Price, low to high'
+										name='asce'
+										onClick={handleDropDownClick}
+									/>
+									<Dropdown.Item
+										text='Price, high to low'
+										name='desc'
+										onClick={handleDropDownClick}
+									/>
+								</Dropdown.Menu>
+							</Dropdown>
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
 			</Container>
-			<Container style={{ marginTop: 20 }}>
-				<ItemDisplay />
-			</Container>
+			<ItemDisplay sortingType={sortingType} />
 		</>
 	);
 };

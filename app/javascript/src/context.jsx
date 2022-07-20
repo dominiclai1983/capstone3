@@ -4,7 +4,12 @@ const Cart = createContext();
 
 const Context = ({ children }) => {
 	const [cart, setCart] = useState([]);
-	return <Cart.Provider value={{ cart, setCart }}>{children}</Cart.Provider>;
+	const [currentOrder, setCurrentOrder] = useState('');
+	return (
+		<Cart.Provider value={{ cart, setCart, currentOrder, setCurrentOrder }}>
+			{children}
+		</Cart.Provider>
+	);
 };
 
 export const CartState = () => {

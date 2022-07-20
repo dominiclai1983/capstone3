@@ -3,28 +3,21 @@ class Api::OrdersController < ApplicationController
     if !session
       return render json: { error: "user not logged in" }, status: :unauthorized
     end
-
-    now = DateTime.current
-    id = session.user.id
-
+=begin
     begin
-      @order =
-        Order.create(
-          {
-            user_id: id,
-            order_date: now,
-            recipient_name: params[:order][:recipient_name],
-            shipping_address_1: params[:order][:shipping_address_1],
-            shipping_address_2: params[:order][:shipping_address_2],
-            postal_code: params[:order][:postal_code],
-            city: params[:order][:city],
-            country: params[:order][:country],
-            phone_number: params[:order][:phone_number]
-          }
-        )
+      @order = Order.create({ user_id: session.user.id })
+      session.user.current_order = @order.id
       render "api/orders/create", status: :created
     rescue ArgumentError => e
       render json: { error: e.message }, status: :bad_request
+    end
+=end
+    @order = Order.create({ user_id: session.user.id })
+    if @order.save && !session.user.current_order
+      session.user.update(current_order: @order.id)
+      render "api/orders/create", status: :created
+    else
+      render json: { success: false }, status: :bad_request
     end
   end
 
@@ -81,21 +74,8 @@ class Api::OrdersController < ApplicationController
 
   private
 
-  def deduct_quantity(order_details)
-    order_details.each { |item| }
-  end
-
   def order_params
-    params.require(:order).permit(
-      :recipient_name,
-      :shipping_address_1,
-      :shipping_address_2,
-      :postal_code,
-      :city,
-      :country,
-      :phone_number,
-      :tracking_number
-    )
+    params.require(:order).permit()
   end
 
   def session

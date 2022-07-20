@@ -9,7 +9,7 @@ import {
 	Icon,
 } from 'semantic-ui-react';
 import { CartState } from '@src/context';
-//import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
+import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
 
 const ProductLayOut = (props) => {
 	let { title, price, description } = props;
@@ -44,6 +44,8 @@ const ProductLayOut = (props) => {
 					<Button fluid style={{ marginTop: 5 }}>
 						Buy it now
 					</Button>
+					<Divider />
+					<ProductIconGroup />
 					<Divider />
 					<Container>
 						<p>{description}</p>
