@@ -76,6 +76,7 @@ class Api::ChargesController < ApplicationController
       #TODO: get all the item by using Order.find(order_id).order_deatils
       #TODO: order_details update reserved quantity
       mark_payment_state
+      mark_reserved
       return head :ok
     end
     return head :bad_request
@@ -83,6 +84,7 @@ class Api::ChargesController < ApplicationController
 
   private
 
+  #TODO: write a method that would reserve inventory
   def mark_status
     order = Order.find(params[:id].to_i)
     order.update_attribute(:status, true)
@@ -91,5 +93,10 @@ class Api::ChargesController < ApplicationController
   def mark_payment_state
     order = Order.find(params[:id].to_i)
     order.update_attribute(:payment_status, true)
+  end
+
+  def mark_reserved
+    order_details = OrderDetail.where(order_id: params[:id])
+    order_details.update_all("reserved = quantity")
   end
 end
