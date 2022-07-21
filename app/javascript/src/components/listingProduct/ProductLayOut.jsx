@@ -55,7 +55,13 @@ const ProductLayOut = (props) => {
 		getItemIntoCart();
 	};
 
-	console.log(`currentOrder ${currentOrder}`);
+	const newProduct = {
+		order_id: parseInt(currentOrder),
+		product_id: product_id,
+		price: parseFloat(price),
+		quantity: 1,
+		title,
+	};
 
 	return (
 		<Grid>
@@ -70,11 +76,11 @@ const ProductLayOut = (props) => {
 					<Button
 						fluid
 						primary
-						onClick={
-							//setCart([...cart, prod]);
-							//console.log(cart);
-							handleAddToCart
-						}
+						onClick={() => {
+							setCart([...cart, newProduct]);
+							handleAddToCart();
+							console.log(cart);
+						}}
 					>
 						Add To Cart
 					</Button>
