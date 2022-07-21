@@ -7,7 +7,7 @@ import { CartState } from '@src/context';
 
 function Layout() {
 	const { pathname } = useLocation();
-	const { cart, currentOrder, setCurrentOrder } = CartState();
+	const { cart, setCart, currentOrder, setCurrentOrder } = CartState();
 	const path = pathname === '/' ? 'home' : pathname.substring(1);
 
 	const [activeItem, setActiveItem] = useState(path);
@@ -29,6 +29,18 @@ function Layout() {
 	}, []);
 
 	console.log(currentOrder);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await axios.get(`/api/order_details/${currentOrder}`);
+				setCart(result.data.order_details);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+		fetchData();
+	}, [currentOrder]);
 
 	const handleItemClick = (e, { name }) => setActiveItem(name);
 

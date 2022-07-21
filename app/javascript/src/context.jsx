@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
+import axios from 'axios';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const Cart = createContext();
 
 const Context = ({ children }) => {
 	const [cart, setCart] = useState([]);
 	const [currentOrder, setCurrentOrder] = useState('');
+
 	return (
 		<Cart.Provider value={{ cart, setCart, currentOrder, setCurrentOrder }}>
 			{children}
