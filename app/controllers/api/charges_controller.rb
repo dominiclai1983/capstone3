@@ -16,6 +16,7 @@ class Api::ChargesController < ApplicationController
     end
 
     total = order_details.sum(:total)
+    mark_status
 
     session =
       Stripe::Checkout::Session.create(
@@ -74,8 +75,21 @@ class Api::ChargesController < ApplicationController
       charge.update({ complete: true })
       #TODO: get all the item by using Order.find(order_id).order_deatils
       #TODO: order_details update reserved quantity
+      mark_payment_state
       return head :ok
     end
     return head :bad_request
+  end
+
+  private
+
+  def mark_status
+    order = Order.find(params[:id].to_i)
+    order.update_attribute(:status, true)
+  end
+
+  def mark_payment_state
+    order = Order.find(params[:id].to_i)
+    order.update_attribute(:payment_status, true)
   end
 end
