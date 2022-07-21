@@ -10,16 +10,52 @@ import {
 } from 'semantic-ui-react';
 import { CartState } from '@src/context';
 import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
+import axios from 'axios';
 
 const ProductLayOut = (props) => {
-	let { title, price, description } = props;
-	const { cart, setCart, currentOrder } = CartState();
+	let { title, price, description, product_id } = props;
+	const { cart, setCart, currentOrder, setCurrentOrder } = CartState();
+	console.log(`productID ${product_id}`);
 
-	const prod = {
-		title,
-		price,
-		quantity: 1,
+	const getOrderNumber = async () => {
+		try {
+			const result = await axios.post(`/api/orders`);
+			if (result.data) {
+				setCurrentOrder(result.data.order_id);
+				console.log(currentOrder);
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
+
+	const getItemIntoCart = async () => {
+		const prod = {
+			order_id: parseInt(currentOrder),
+			product_id: product_id,
+			price: parseFloat(price),
+			quantity: 1,
+		};
+
+		try {
+			const result = await axios.post(`/api/order_details`, prod);
+			if (result.data) {
+				console.log('success');
+				console.log(result.data);
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const handleAddToCart = async () => {
+		if (currentOrder === null) {
+			getOrderNumber();
+		}
+		getItemIntoCart();
+	};
+
+	console.log(`currentOrder ${currentOrder}`);
 
 	return (
 		<Grid>
@@ -34,10 +70,11 @@ const ProductLayOut = (props) => {
 					<Button
 						fluid
 						primary
-						onClick={() => {
-							setCart([...cart, prod]);
-							console.log(cart);
-						}}
+						onClick={
+							//setCart([...cart, prod]);
+							//console.log(cart);
+							handleAddToCart
+						}
 					>
 						Add To Cart
 					</Button>

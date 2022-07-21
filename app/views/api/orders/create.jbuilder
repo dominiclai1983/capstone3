@@ -1,1 +1,1 @@
-json.order { json.order_id @order.id }
+json.order_id @order.id

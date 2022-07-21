@@ -27,6 +27,7 @@ const ListingProduct = () => {
 	/*
 	note: pass down the whole obj by using spreading
 	*/
+	console.log(product);
 
 	return (
 		<>

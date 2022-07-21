@@ -74,12 +74,14 @@ users =
         username: "mimi",
         email: "mimi@test.com",
         password: "password",
+        password_confirmation: "password",
         is_admin: true
       },
       {
         username: "kiki",
         email: "kiki@test.com",
         password: "password",
+        password_confirmation: "password",
         is_admin: true
       }
     ]
