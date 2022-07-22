@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
     render "index"
   end
 
+  def checkout
+    render "checkout"
+  end
+
   #def login
   #  render "login"
   #end

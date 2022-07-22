@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get "/product/:sku" => "static_pages#index"
   get "/cart"         => "static_pages#index"
 
+  get "/checkout"         => "static_pages#checkout"
+  get '/checkout/confirm' => "static_pages#checkout"
+
   namespace :api do
     resources :users, only: %i[create index]
     resources :order_details, only: [:create]
