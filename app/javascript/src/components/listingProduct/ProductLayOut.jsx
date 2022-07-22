@@ -7,6 +7,7 @@ import {
 	Button,
 	Container,
 	Icon,
+	Label,
 } from 'semantic-ui-react';
 import { CartState } from '@src/context';
 import ProductIconGroup from '@components/listingProduct/ProductIconGroup';
@@ -40,8 +41,8 @@ const ProductLayOut = (props) => {
 		try {
 			const result = await axios.post(`/api/order_details`, prod);
 			if (result.data) {
-				console.log('success');
-				console.log(result.data);
+				console.log(result.data.order_detail);
+				setCart([...cart, result.data.order_detail]);
 			}
 		} catch (err) {
 			console.error(err);
@@ -55,14 +56,6 @@ const ProductLayOut = (props) => {
 		getItemIntoCart();
 	};
 
-	const newProduct = {
-		order_id: parseInt(currentOrder),
-		product_id: product_id,
-		price: parseFloat(price),
-		quantity: 1,
-		title,
-	};
-
 	return (
 		<Grid>
 			<Grid.Row>
@@ -72,19 +65,11 @@ const ProductLayOut = (props) => {
 				<Grid.Column width={6} style={{ marginTop: 40 }}>
 					<Header as='h3'>{title}</Header>
 					<Header as='h4'>{price}</Header>
-					<Divider />
-					<Button
-						fluid
-						primary
-						onClick={() => {
-							setCart([...cart, newProduct]);
-							handleAddToCart();
-							console.log(cart);
-						}}
-					>
+					<Divider style={{ marginBottom: 20 }} />
+					<Button fluid primary onClick={handleAddToCart}>
 						Add To Cart
 					</Button>
-					<Button fluid style={{ marginTop: 5 }}>
+					<Button fluid style={{ marginTop: 10, marginButton: 20 }}>
 						Buy it now
 					</Button>
 					<Divider />

@@ -36,7 +36,7 @@ product_codes =
 
 
 
-
+=end
 products =
   Product.create(
     [
@@ -44,29 +44,29 @@ products =
         title: "A Large Bracelet",
         description: "A Large Bracelet",
         sku: "B101",
-        price: 12.33,
-        quantity: 5,
+        price: 19.33,
+        quantity: 20,
         product_code_id: 1
       },
       {
         title: "A Medium Bracelet",
         description: "A Medium Bracelet",
         sku: "B102",
-        price: 12.55,
-        quantity: 5,
+        price: 16.55,
+        quantity: 40,
         product_code_id: 1
       },
       {
         title: "A Small Bracelet",
         description: "A Small Bracelet",
         sku: "B103",
-        price: 12.44,
-        quantity: 5,
+        price: 13.44,
+        quantity: 40,
         product_code_id: 1
       }
     ]
   )
-=end
+=begin
 users =
   User.create(
     [
@@ -86,3 +86,4 @@ users =
       }
     ]
   )
+=end

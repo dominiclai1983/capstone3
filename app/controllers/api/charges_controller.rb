@@ -77,6 +77,7 @@ class Api::ChargesController < ApplicationController
       #TODO: order_details update reserved quantity
       mark_payment_state
       mark_reserved
+      mark_current_order
       return head :ok
     end
     return head :bad_request
@@ -97,6 +98,19 @@ class Api::ChargesController < ApplicationController
 
   def mark_reserved
     order_details = OrderDetail.where(order_id: params[:id])
-    order_details.update_all("reserved = quantity")
+    order_details.map do |item|
+      reserved = item.product.reserved + item.quantity
+      item.product.update_attribute(:reserved, reserved)
+    end
+  end
+
+  def mark_current_order
+    token = cookies.signed[:ecommerce_session_token]
+    session = Session.find_by(token: token)
+
+    if session
+      @user = session.user
+      @user.update_attribute(:current_order, nil)
+    end
   end
 end
