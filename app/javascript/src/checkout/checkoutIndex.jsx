@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CheckoutLayout from './checkoutLayout';
 import CheckoutAddress from './checkoutAddress';
 import CheckoutConfirm from './checkoutConfirm';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -8,7 +9,7 @@ const CheckoutIndex = () => (
 	<>
 		<BrowserRouter>
 			<Routes>
-				<Route path='checkout' element={<CheckoutAddress />}>
+				<Route path='checkout' element={<CheckoutLayout />}>
 					<Route index element={<CheckoutAddress />} />
 					<Route path='confirm' element={<CheckoutConfirm />} />
 				</Route>
