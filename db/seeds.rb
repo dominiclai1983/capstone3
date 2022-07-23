@@ -37,6 +37,7 @@ product_codes =
 
 
 =end
+=begin
 products =
   Product.create(
     [
@@ -66,7 +67,7 @@ products =
       }
     ]
   )
-=begin
+
 users =
   User.create(
     [
@@ -87,3 +88,20 @@ users =
     ]
   )
 =end
+addresses =
+  Address.create(
+    [
+      {
+        first_name: "kiki",
+        last_name: "kiki",
+        billing_email: "kiki@test.com",
+        phone_number: "12345678",
+        address_1: "The address 1",
+        address_2: "The address 2",
+        district: "Aberdeen",
+        region: "HK",
+        is_billing: false,
+        user_id: 3
+      }
+    ]
+  )

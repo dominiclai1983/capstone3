@@ -32,12 +32,6 @@ const CheckoutLayout = () => {
 							<Step.Title>Confirm Order</Step.Title>
 						</Step.Content>
 					</Step>
-
-					<Step disabled>
-						<Step.Content>
-							<Step.Title>Confirm Order</Step.Title>
-						</Step.Content>
-					</Step>
 				</Step.Group>
 			</Container>
 			<Outlet context={[activeItem, setActiveItem]} />

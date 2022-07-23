@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :sessions
   has_many :orders
+  has_many :addresses
 
   has_secure_password
   #remember to make the proper association. otherwise, it would not be able to read.

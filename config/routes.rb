@@ -40,9 +40,13 @@ Rails.application.routes.draw do
     post    "/products"             => "products#create"
     post    "/products/:sku"        => "products#edit_by_sku"
 
-    #product code
+    #product code api
     post    "/product_codes"        => "product_codes#create"
     get     "/product_codes/:desc"  => "product_codes#find_product_code_by_desc"
+
+    #address api
+    post    "/addresses"            => "addresses#create"
+    get     "/addresses"            => "addresses#index"
 
     #session api
     post    "/sessions"             => "sessions#create"
