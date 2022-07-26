@@ -17,7 +17,7 @@ const CheckoutConfirm = () => {
 			.then((response) => {
 				const stripe = Stripe(`${process.env.STRIPE_PUBLISHABLE_KEY}`);
 				console.log(response);
-
+				//TODO:the above is client secret. remember to remove them!!!
 				stripe
 					.redirectToCheckout({
 						// Make the id field from the Checkout Session creation API response

@@ -1,8 +1,8 @@
 class Api::ChargesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:mark_complete]
-=begin
+
   def create
-    token = cookies.signed[:airbnb_session_token]
+    token = cookies.signed[:ecommerce_session_token]
     session = Session.find_by(token: token)
     if !session
       return(
@@ -26,39 +26,7 @@ class Api::ChargesController < ApplicationController
           {
             name: "Payment for Order#{params[:id]}",
             description: "Your payment for Order#{params[:id]} on the site.",
-            amount: (total * 100.0).to_i, # amount in cents
-            currency: "usd"
-          }
-        ],
-        success_url: "#{ENV["URL"]}/order/#{params[:id]}/success",
-        cancel_url: "#{ENV["URL"]}#{params[:cancel_url]}"
-      )
-
-    @charge =
-      order.charges.new(
-        { checkout_session_id: session.id, currency: "usd", amount: amount }
-      )
-
-    if @charge.save
-      render "api/charges/create", status: :created
-    else
-      render json: {
-               error: "charge could not be created"
-             },
-             status: :bad_request
-    end
-  end
-=end
-
-  def create
-    session =
-      Stripe::Checkout::Session.create(
-        payment_method_types: ["card"],
-        line_items: [
-          {
-            name: "Payment for Order#{params[:id]}",
-            description: "Your payment for Order#{params[:id]} on the site.",
-            amount: 120_000, # amount in cents
+            amount: (total.to_i) * 100, # amount in cents
             currency: "EUR",
             quantity: 1
           }
@@ -71,7 +39,7 @@ class Api::ChargesController < ApplicationController
 
     @charge =
       order.charges.new(
-        { checkout_session_id: session.id, currency: "EUR", amount: 1200 }
+        { checkout_session_id: session.id, currency: "EUR", amount: total }
       )
 
     if @charge.save
