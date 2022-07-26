@@ -51,24 +51,27 @@ class Api::ChargesController < ApplicationController
 =end
 
   def create
-    payment_intent =
-      Stripe::PaymentIntent.create(
-        amount: 1200 * 100,
-        currency: "eur",
-        automatic_payment_methods: {
-          enabled: true
-        }
+    session =
+      Stripe::Checkout::Session.create(
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            name: "Payment for Order#{params[:id]}",
+            description: "Your payment for Order#{params[:id]} on the site.",
+            amount: 120_000, # amount in cents
+            currency: "EUR",
+            quantity: 1
+          }
+        ],
+        success_url: "#{ENV["URL"]}/order/#{params[:id]}/success",
+        cancel_url: "#{ENV["URL"]}#{params[:cancel_url]}"
       )
 
     order = Order.find_by(id: params[:id])
 
     @charge =
       order.charges.new(
-        {
-          checkout_session_id: payment_intent["client_secret"],
-          currency: "EUR",
-          amount: 1200
-        }
+        { checkout_session_id: session.id, currency: "EUR", amount: 1200 }
       )
 
     if @charge.save
