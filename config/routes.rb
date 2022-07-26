@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     #address api
     post    "/addresses"            => "addresses#create"
     get     "/addresses"            => "addresses#index"
+    post    "/addresses/:id"        => "addresses#edit_address_by_address_id"
 
     #session api
     post    "/sessions"             => "sessions#create"

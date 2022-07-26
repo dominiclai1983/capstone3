@@ -29,7 +29,7 @@ class Api::OrdersController < ApplicationController
 
   def edit_order_by_order_id
     if session and is_admin?
-      @order = Order.find(params[:id])
+      @order = Order.find_by(id: params[:id])
 
       if !@order.status and @order.update(order_params)
         render "api/orders/show", status: :ok

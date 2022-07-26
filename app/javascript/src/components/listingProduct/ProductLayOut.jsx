@@ -49,7 +49,7 @@ const ProductLayOut = (props) => {
 		}
 	};
 
-	const handleAddToCart = async () => {
+	const handleAddToCart = async (currentOrder) => {
 		if (currentOrder === null) {
 			getOrderNumber();
 		}

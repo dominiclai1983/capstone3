@@ -1,6 +1,6 @@
 class Api::ChargesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:mark_complete]
-
+=begin
   def create
     token = cookies.signed[:airbnb_session_token]
     session = Session.find_by(token: token)
@@ -11,6 +11,7 @@ class Api::ChargesController < ApplicationController
     end
 
     order_details = OrderDetail.where(order_id: params[:id])
+    order = Order.find_by(id: params[:id])
     if !order_details
       return render json: { error: "cannot find order" }, status: :not_found
     end
@@ -34,8 +35,40 @@ class Api::ChargesController < ApplicationController
       )
 
     @charge =
-      booking.charges.new(
+      order.charges.new(
         { checkout_session_id: session.id, currency: "usd", amount: amount }
+      )
+
+    if @charge.save
+      render "api/charges/create", status: :created
+    else
+      render json: {
+               error: "charge could not be created"
+             },
+             status: :bad_request
+    end
+  end
+=end
+
+  def create
+    payment_intent =
+      Stripe::PaymentIntent.create(
+        amount: 1200 * 100,
+        currency: "eur",
+        automatic_payment_methods: {
+          enabled: true
+        }
+      )
+
+    order = Order.find_by(id: params[:id])
+
+    @charge =
+      order.charges.new(
+        {
+          checkout_session_id: payment_intent["client_secret"],
+          currency: "EUR",
+          amount: 1200
+        }
       )
 
     if @charge.save

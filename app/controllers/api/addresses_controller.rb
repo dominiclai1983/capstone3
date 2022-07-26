@@ -11,6 +11,21 @@ class Api::AddressesController < ApplicationController
     end
   end
 
+  def edit_address_by_address_id
+    if session
+      @address = Address.find_by(id: params[:id])
+
+      if @address and @address.update(address_params)
+        render "api/addresses/show"
+        #TODO: the show.jbuilder is still not completed
+      else
+        render json: { success: false }
+      end
+    else
+      render json: { success: false }
+    end
+  end
+
   private
 
   def address_params
