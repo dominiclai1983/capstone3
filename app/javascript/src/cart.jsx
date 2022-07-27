@@ -57,6 +57,8 @@ const Cart = () => {
 								labelPosition='left'
 								primary
 								size='small'
+								as='a'
+								href='/checkout'
 							>
 								<Icon name='check' /> Check Out
 							</Button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Outlet } from 'react-router-dom';
+import { useLocation, Outlet, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Step, Container } from 'semantic-ui-react';
+import { Step, Container, Header, Button } from 'semantic-ui-react';
 import { CheckoutState } from './checkoutContext';
 
 const CheckoutLayout = () => {
@@ -29,7 +29,8 @@ const CheckoutLayout = () => {
 		const fetchData = async () => {
 			try {
 				const result = await axios.get(`/api/order_details/${currentOrder}`);
-				setCart(result.data.order_details);
+				let cartItem = result.data.order_details;
+				setCart(cartItem);
 			} catch (err) {
 				console.error(err);
 			}
@@ -37,7 +38,18 @@ const CheckoutLayout = () => {
 		fetchData();
 	}, [currentOrder]);
 
-	console.log(cart);
+	const EmptyCart = () => {
+		return (
+			<>
+				<Container style={{ marginTop: 20 }}>
+					<Header as='h1'>The cart is empty!</Header>
+					<Button primary as='a' href='/'>
+						Go Shopping!
+					</Button>
+				</Container>
+			</>
+		);
+	};
 
 	return (
 		<>
@@ -64,7 +76,11 @@ const CheckoutLayout = () => {
 					</Step>
 				</Step.Group>
 			</Container>
-			<Outlet context={[activeItem, setActiveItem]} />
+			{cart.length === 0 ? (
+				<EmptyCart />
+			) : (
+				<Outlet context={[activeItem, setActiveItem]} />
+			)}
 		</>
 	);
 };

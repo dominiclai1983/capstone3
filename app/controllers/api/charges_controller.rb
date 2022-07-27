@@ -11,12 +11,11 @@ class Api::ChargesController < ApplicationController
     end
 
     order_details = OrderDetail.where(order_id: params[:id])
-    order = Order.find_by(id: params[:id])
     if !order_details
       return render json: { error: "cannot find order" }, status: :not_found
     end
 
-    total = order_details.sum(:total)
+    total = (order_details.sum(:total) * 100).to_i
     mark_status
 
     session =
@@ -26,12 +25,12 @@ class Api::ChargesController < ApplicationController
           {
             name: "Payment for Order#{params[:id]}",
             description: "Your payment for Order#{params[:id]} on the site.",
-            amount: (total.to_i) * 100, # amount in cents
+            amount: total, # amount in cents
             currency: "EUR",
             quantity: 1
           }
         ],
-        success_url: "#{ENV["URL"]}/order/#{params[:id]}/success",
+        success_url: "#{ENV["URL"]}/checkout/#{params[:id]}/success",
         cancel_url: "#{ENV["URL"]}#{params[:cancel_url]}"
       )
 
@@ -89,7 +88,6 @@ class Api::ChargesController < ApplicationController
 
   private
 
-  #TODO: write a method that would reserve inventory
   def mark_status
     order = Order.find(params[:id].to_i)
     order.update_attribute(:status, true)

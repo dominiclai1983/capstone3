@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Container, Button } from 'semantic-ui-react';
 import { CheckoutState } from './checkoutContext';
 import { safeCredentials, handleErrors } from '@components/utils/fetchHelper';
