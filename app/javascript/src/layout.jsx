@@ -28,7 +28,8 @@ function Layout() {
 		fetchData();
 	}, []);
 
-	console.log(currentOrder);
+	console.log('current order ' + currentOrder);
+	console.log(currentOrder ? 'current order true' : 'current order false');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -85,9 +86,11 @@ function Layout() {
 		let { username } = props;
 		return (
 			<>
-				<Dropdown item text='username'>
+				<Dropdown item text={username.toString()}>
 					<Dropdown.Menu>
-						<Dropdown.Item>Account</Dropdown.Item>
+						<Dropdown.Item as='a' href='/account'>
+							Account
+						</Dropdown.Item>
 						<Dropdown.Item>Order</Dropdown.Item>
 						<Dropdown.Item>Payment</Dropdown.Item>
 						<Dropdown.Item onClick={handleLogOut}>Logout</Dropdown.Item>

@@ -8,6 +8,7 @@ class Api::SessionsController < ApplicationController
         value: session.token,
         httponly: true
       }
+      
 
       render "api/sessions/create", status: :created
     else

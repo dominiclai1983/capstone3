@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Outlet, Link } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { Step, Container, Header, Button } from 'semantic-ui-react';
 import { CheckoutState } from './checkoutContext';
@@ -8,22 +8,23 @@ const CheckoutLayout = () => {
 	const { pathname } = useLocation();
 	const { cart, setCart, currentOrder, setCurrentOrder } = CheckoutState();
 	const path = pathname === '/checkout' ? 'home' : pathname.substring(10);
-
 	const [activeItem, setActiveItem] = useState(path);
+	const [isEmpty, setIsEmpty] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const result = await axios.get('/api/authenticated');
 				setCurrentOrder(result.data.current_order);
+				if (!result.data.current_order) {
+					setIsEmpty(!isEmpty);
+				}
 			} catch (err) {
 				console.error(err);
 			}
 		};
 		fetchData();
 	}, []);
-
-	console.log('current order' + currentOrder);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -51,6 +52,8 @@ const CheckoutLayout = () => {
 		);
 	};
 
+	console.log(`isEmpty ` + isEmpty);
+
 	return (
 		<>
 			<Container style={{ marginTop: 20 }}>
@@ -76,7 +79,7 @@ const CheckoutLayout = () => {
 					</Step>
 				</Step.Group>
 			</Container>
-			{cart.length === 0 ? (
+			{isEmpty ? (
 				<EmptyCart />
 			) : (
 				<Outlet context={[activeItem, setActiveItem]} />

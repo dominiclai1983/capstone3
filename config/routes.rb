@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "/cart"                 => "static_pages#index"
 
   get "/checkout"             => "static_pages#checkout"
-  get '/checkout/:id/success' => "static_pages#checkout"
+  get "/checkout/:id/success" => "static_pages#checkout"
+
+  get "/account"              => "static_pages#index"
 
   namespace :api do
     resources :users, only: %i[create index]

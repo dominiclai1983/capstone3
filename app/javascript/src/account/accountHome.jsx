@@ -1,7 +1,9 @@
 import React from 'react';
+import { CartState } from '@src/context';
 
 const AccountHome = () => {
-	return <div>AccountHome</div>;
+	const { username } = CartState();
+	return <div>AccountHome {username}</div>;
 };
 
 export default AccountHome;

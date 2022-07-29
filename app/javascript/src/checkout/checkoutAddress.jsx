@@ -48,6 +48,7 @@ const CheckoutAddress = () => {
 	}, []);
 
 	console.log(pathname);
+	console.log(Object.keys(shippingAddress).length);
 
 	const ShowingAddress = () => {
 		return (

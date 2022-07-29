@@ -1,6 +1,7 @@
 // home.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Context from './context';
 import Layout from './layout';
 import Home from './home';
 import Login from './login';
@@ -10,7 +11,6 @@ import ListingProduct from './listingProduct';
 import Cart from './cart';
 import AccountLayout from './account/accountLayout';
 import AccountHome from './account/accountHome';
-import Context from './context';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const Index = () => (

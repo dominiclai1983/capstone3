@@ -30,7 +30,11 @@ const ProductLayOut = (props) => {
 		}
 	};
 
-	const getItemIntoCart = async () => {
+	const getItemIntoCart = async (currentOrder) => {
+		if (!currentOrder) {
+			getOrderNumber();
+		}
+
 		const prod = {
 			order_id: parseInt(currentOrder),
 			product_id: product_id,
@@ -49,13 +53,6 @@ const ProductLayOut = (props) => {
 		}
 	};
 
-	const handleAddToCart = async (currentOrder) => {
-		if (currentOrder === null) {
-			getOrderNumber();
-		}
-		getItemIntoCart();
-	};
-
 	return (
 		<Grid>
 			<Grid.Row>
@@ -66,7 +63,13 @@ const ProductLayOut = (props) => {
 					<Header as='h3'>{title}</Header>
 					<Header as='h4'>{price}</Header>
 					<Divider style={{ marginBottom: 20 }} />
-					<Button fluid primary onClick={handleAddToCart}>
+					<Button
+						fluid
+						primary
+						onClick={() => {
+							getItemIntoCart(currentOrder);
+						}}
+					>
 						Add To Cart
 					</Button>
 					<Button fluid style={{ marginTop: 10, marginButton: 20 }}>

@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { CartState } from '@src/context';
 import { Outlet } from 'react-router-dom';
 import { Container, Header, Grid, Image, Menu } from 'semantic-ui-react';
 
 import '@src/css/utils.scss';
 
 const AccountLayout = () => {
+	const { setUsername } = CartState();
 	const [activeItem, setActiveItem] = useState('editorials');
 
 	const handleItemClick = (e, { name }) => setActiveItem(name);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await axios.get('/api/authenticated');
+				setUsername(result.data.username);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+		fetchData();
+	}, []);
 
 	const AccountMenu = () => {
 		return (
