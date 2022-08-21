@@ -7,12 +7,18 @@ import { CartState } from '@src/context';
 
 function Layout() {
 	const { pathname } = useLocation();
-	const { cart, setCart, currentOrder, setCurrentOrder } = CartState();
+	const {
+		cart,
+		setCart,
+		currentOrder,
+		setCurrentOrder,
+		username,
+		setUsername,
+	} = CartState();
 	const path = pathname === '/' ? 'home' : pathname.substring(1);
 
 	const [activeItem, setActiveItem] = useState(path);
 	const [isLogin, setIsLogin] = useState(false);
-	const [username, setUsername] = useState('user');
 
 	useEffect(() => {
 		const fetchData = async () => {

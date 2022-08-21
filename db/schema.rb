@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_01_133002) do
+ActiveRecord::Schema.define(version: 2022_08_21_142150) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,23 @@ ActiveRecord::Schema.define(version: 2022_08_01_133002) do
     t.index ["order_id"], name: "index_charges_on_order_id"
   end
 
+  create_table "guest_cart_details", force: :cascade do |t|
+    t.decimal "price", precision: 10, scale: 2
+    t.decimal "total", precision: 10, scale: 2
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "guest_cart_id"
+    t.integer "product_id"
+    t.index ["guest_cart_id"], name: "index_guest_cart_details_on_guest_cart_id"
+    t.index ["product_id"], name: "index_guest_cart_details_on_product_id"
+  end
+
+  create_table "guest_carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "order_details", force: :cascade do |t|
     t.decimal "price", precision: 10, scale: 2
     t.decimal "total", precision: 10, scale: 2
@@ -156,6 +173,8 @@ ActiveRecord::Schema.define(version: 2022_08_01_133002) do
   add_foreign_key "cart_details", "products"
   add_foreign_key "carts", "users"
   add_foreign_key "charges", "orders"
+  add_foreign_key "guest_cart_details", "guest_carts"
+  add_foreign_key "guest_cart_details", "products"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
   add_foreign_key "orders", "users"

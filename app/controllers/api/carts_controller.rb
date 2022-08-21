@@ -1,4 +1,5 @@
 class Api::CartsController < ApplicationController
+=begin
   def create
     token = cookies.signed[:ecommerce_session_token]
     session = Session.find_by(token: token)
@@ -13,4 +14,5 @@ class Api::CartsController < ApplicationController
       @cart = session.user.current_cart
     end
   end
+=end
 end

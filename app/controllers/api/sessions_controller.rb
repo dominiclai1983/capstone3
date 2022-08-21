@@ -8,8 +8,6 @@ class Api::SessionsController < ApplicationController
         value: session.token,
         httponly: true
       }
-      
-
       render "api/sessions/create", status: :created
     else
       render json: { success: false }, status: :bad_request
@@ -34,4 +32,6 @@ class Api::SessionsController < ApplicationController
 
     render json: { success: true }, status: :ok if session and session.destroy
   end
+
+  private
 end

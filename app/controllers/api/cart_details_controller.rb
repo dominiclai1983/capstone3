@@ -1,10 +1,4 @@
 class Api::CartDetailsController < ApplicationController
-=begin
-  def create
-    #TODO: create the same cart without login
-  end
-=end
-
   #the following is good code for login
   def create
     token = cookies.signed[:ecommerce_session_token]
@@ -40,12 +34,6 @@ class Api::CartDetailsController < ApplicationController
   end
 
   private
-
-  def new_shopping_cart
-    cart = Cart.create
-    global_id = cart.to_signed_global_id(expires_in: 1.day)
-    session[:active_shopping_cart_id] = global_id.to_s
-  end
 
   def session
     token = cookies.signed[:ecommerce_session_token]
