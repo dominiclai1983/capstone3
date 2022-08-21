@@ -67,28 +67,7 @@ products =
       }
     ]
   )
-
-users =
-  User.create(
-    [
-      {
-        username: "mimi",
-        email: "mimi@test.com",
-        password: "password",
-        password_confirmation: "password",
-        is_admin: true
-      },
-      {
-        username: "kiki",
-        email: "kiki@test.com",
-        password: "password",
-        password_confirmation: "password",
-        is_admin: true
-      }
-    ]
-  )
-=end
-addresses =
+  addresses =
   Address.create(
     [
       {
@@ -102,6 +81,34 @@ addresses =
         region: "HK",
         is_billing: false,
         user_id: 3
+      }
+    ]
+  )
+=end
+
+users =
+  User.create(
+    [
+      {
+        username: "test",
+        email: "test@test.com",
+        password: "password",
+        password_confirmation: "password",
+        is_admin: true
+      },
+      {
+        username: "mimi",
+        email: "mimi@test.com",
+        password: "password",
+        password_confirmation: "password",
+        is_admin: true
+      },
+      {
+        username: "kiki",
+        email: "kiki@test.com",
+        password: "password",
+        password_confirmation: "password",
+        is_admin: true
       }
     ]
   )

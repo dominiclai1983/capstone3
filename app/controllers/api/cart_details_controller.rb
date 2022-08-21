@@ -1,7 +1,62 @@
 class Api::CartDetailsController < ApplicationController
+=begin
+  def create
+    #TODO: create the same cart without login
+  end
+=end
+
+  #the following is good code for login
+  def create
+    token = cookies.signed[:ecommerce_session_token]
+    session = Session.find_by(token: token)
+
+    if session
+      if !session.user.current_cart
+        @cart = Cart.create({ user_id: session.user.id })
+        session.user.update_attribute(:current_cart, @cart.id)
+        @id = @cart.id
+      else
+        @id = session.user.current_cart
+      end
+    end
+
+    total = params[:cart_detail][:quantity] * params[:cart_detail][:price]
+
+    begin
+      @cart_detail =
+        CartDetail.create(
+          {
+            cart_id: @id,
+            product_id: params[:cart_detail][:product_id],
+            price: params[:cart_detail][:price],
+            quantity: params[:cart_detail][:quantity],
+            total: total
+          }
+        )
+      render "api/cart_details/show", status: :created
+    rescue ArgumentError => e
+      render json: { error: e.message }, status: :bad_request
+    end
+  end
+
+  private
+
   def new_shopping_cart
-    cart = ShoppingCart.create
+    cart = Cart.create
     global_id = cart.to_signed_global_id(expires_in: 1.day)
     session[:active_shopping_cart_id] = global_id.to_s
+  end
+
+  def session
+    token = cookies.signed[:ecommerce_session_token]
+    session = Session.find_by(token: token)
+  end
+
+  def cart_detail_params
+    params.require(:cart_detail).permit(:product_id, :price, :quantity)
+  end
+
+  def current_cart?
+    session.user.current_cart?
   end
 end

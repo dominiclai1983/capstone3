@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     post    "/order_details"        => "order_details#create"
     get     "/order_details/:order" => "order_details#get_order_details_by_order_id"
 
+    #cart_detail api
+    post    "/cart_details"         => "cart_details#create"
+    get     "/cart_details/:cart"   => "cart_details#get_order_details_by_cart_id"
+
     #order api
     get     "/orders"               => "orders#index"
     post    "/orders"               => "orders#create"
