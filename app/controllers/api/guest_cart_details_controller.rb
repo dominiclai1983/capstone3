@@ -1,13 +1,14 @@
 class Api::GuestCartDetailsController < ApplicationController
   def create
     if !session
-      if !session[:ecommerce_cart_id] == nil
-        @guest_cart = GuestCart.create
+      global_id = GlobalID::Locator.locate_signed(session[:ecommerce_cart_id])
+      if session[:ecommerce_cart_id] == nil || global_id == nil
+        guest_cart = GuestCart.create
         global_id = guest_cart.to_signed_global_id
         session[:ecommerce_cart_id] = global_id.to_s
-        @id = @guest_cart.id
+        @id = guest_cart.id
       else
-        @id = GlobalID::Locator.locate_signed(session[:ecommerce_cart_id])
+        @id = global_id
       end
     end
 

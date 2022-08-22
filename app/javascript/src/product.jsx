@@ -19,6 +19,7 @@ const Product = () => {
 	const [activeItem, setActiveItem] = useOutletContext();
 	const [sortingType, setSortingType] = useState('default');
 
+	//refer layout.jsx for useOutletContext() hook
 	const handleItemClick = (e, { name }) => {
 		setActiveItem(name);
 		console.log(name);
