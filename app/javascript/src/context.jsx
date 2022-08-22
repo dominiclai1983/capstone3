@@ -7,7 +7,6 @@ const Context = ({ children }) => {
 	const [shippingAddress, setShippingAddress] = useState({});
 	const [billingAddress, setBillingAddress] = useState({});
 	const [currentOrder, setCurrentOrder] = useState('');
-	const [username, setUsername] = useState('');
 
 	return (
 		<Cart.Provider
@@ -20,8 +19,6 @@ const Context = ({ children }) => {
 				setShippingAddress,
 				billingAddress,
 				setBillingAddress,
-				username,
-				setUsername,
 			}}
 		>
 			{children}

@@ -5,15 +5,16 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { CartState } from '@src/context';
 
-function Layout() {
+function NewLayout() {
 	const { pathname } = useLocation();
-	const { cart, setCart, currentOrder, setCurrentOrder } = CartState();
+	//const { cart, setCart, currentOrder, setCurrentOrder } = CartState();
 	const path = pathname === '/' ? 'home' : pathname.substring(1);
 
 	const [activeItem, setActiveItem] = useState(path);
 	const [isLogin, setIsLogin] = useState(false);
 	const [username, setUsername] = useState('');
 
+	/*
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -41,7 +42,8 @@ function Layout() {
 		};
 		fetchData();
 	}, [currentOrder]);
-
+*/
+	console.log('something');
 	const handleItemClick = (e, { name }) => setActiveItem(name);
 
 	const handleLogOut = async () => {
@@ -163,4 +165,4 @@ function Layout() {
 	);
 }
 
-export default Layout;
+export default NewLayout;

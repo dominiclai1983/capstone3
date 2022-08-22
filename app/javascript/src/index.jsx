@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Context from './context';
-import Layout from './layout';
+import NewLayout from './newlayout';
 import Home from './home';
 import Login from './login';
 import Signup from './signup';
@@ -18,7 +18,7 @@ const Index = () => (
 		<Context>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<Layout />}>
+					<Route path='/' element={<NewLayout />}>
 						<Route index element={<Home />} />
 						<Route path='login' element={<Login />} />
 						<Route path='signup' element={<Signup />} />
